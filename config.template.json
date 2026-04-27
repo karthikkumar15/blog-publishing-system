@@ -1,0 +1,36 @@
+{
+  "site": {
+    "name": "Your Blog Site Name",
+    "domain": "yourblog.com",
+    "baseUrl": "https://yourblog.com",
+    "description": "Your site description"
+  },
+  "github": {
+    "owner": "your-github-username",
+    "repo": "your-repo-name",
+    "branch": "main",
+    "contentPath": "src/data",
+    "componentPath": "src/components/articles"
+  },
+  "deployment": {
+    "platform": "vercel",
+    "projectName": "your-vercel-project"
+  },
+  "blogStructure": {
+    "trackerPath": "/path/to/tracker.json",
+    "articlesRootPath": "/path/to/articles/folder",
+    "requiredFiles": [
+      "08-final-draft.md",
+      "10-seo-package.md",
+      "09-interactive-visuals/specs.md"
+    ]
+  },
+  "authors": [
+    {
+      "id": "author-1",
+      "name": "Author Name",
+      "slug": "author-name",
+      "avatar": "https://example.com/avatar.jpg"
+    }
+  ]
+}
