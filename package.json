@@ -6,9 +6,7 @@
   "scripts": {
     "init": "node scripts/init.js",
     "validate": "node scripts/validate-config.js",
-    "check-token": "node scripts/check-token.js",
-    "publish": "node scripts/publish.js",
-    "list-authors": "node scripts/list-authors.js"
+    "check-token": "node scripts/check-token.js"
   },
   "keywords": ["blog", "publishing", "automation", "vercel"],
   "author": "",
