@@ -116,23 +116,62 @@ Read the file from $REPO_DIR/src/data/articles.ts and prepend new Article object
   date: "[today's date: DD Mon YYYY]",
   readTime: "${readTime} min read",
   views: 0,
-  author: { name: "${author}", avatar: "[lookup from CONFIG.authors]" },
+  author: { name: "${author}", avatar: "[lookup avatar]" },
   thumbnail: "[thumbnail URL or placeholder]",
   externalUrl: "/resources/${slug}",
 }
 ```
 
+To get the avatar, find the author in CONFIG.authors where author.name matches the extracted `author` name, and use their avatar URL. If not found, use empty string "".
+
+Example:
+```javascript
+const authorConfig = CONFIG.authors.find(a => a.name === author);
+const avatar = authorConfig?.avatar || "";
+```
+
 ### 6b. Update `src/data/articleContent.ts`
 
-Insert new entry with MARKED_CONTENT as a template literal. Escape backticks and ${ sequences.
+Insert new entry with MARKED_CONTENT as a template literal. Escape backticks and ${ sequences in the template literal. Any backtick in content becomes \`, and any ${ becomes \${.
+
+Example:
+- Content: This is a `code` example with ${variable}
+- Escaped: This is a \`code\` example with \${variable}
 
 ### 6c. Create/Update `src/data/articleComponents.tsx`
 
 Add slug entry with component imports.
 
-### 6d. Modify `src/pages/Article.tsx` (one-time)
+Structure in articleComponents.tsx:
 
-If not already modified, add imports and rendering logic for visual components (see original skill for details).
+```typescript
+export const articleComponents: Record<string, Record<string, ComponentType>> = {
+  'article-slug': {
+    ComponentName1: lazy(() => import('../components/articles/article-slug/component-name-1')),
+    ComponentName2: lazy(() => import('../components/articles/article-slug/component-name-2')),
+  },
+};
+```
+
+Where:
+- Key is the article slug
+- Values are objects mapping PascalCase component names to lazy-loaded imports
+- Import paths use kebab-case filenames without .tsx extension
+
+### 6d. Modify `src/pages/Article.tsx` (one-time setup)
+
+Check if already modified by looking for `articleComponents` import or `visual:` text.
+
+If not already modified, add:
+1. Import at top: `import { articleComponents } from '../data/articleComponents';`
+2. Add `Suspense` to React imports
+3. Replace the `<ReactMarkdown>` rendering with logic that:
+   - Splits content by `<!-- visual:ComponentName -->` markers
+   - Renders markdown sections with ReactMarkdown
+   - Renders components wrapped in Suspense with fallback loader
+   - This connects the markdown markers to actual React components
+
+This is typically done once and reused for all future blogs.
 
 ---
 
@@ -146,6 +185,8 @@ git add src/data/ src/components/ src/pages/
 git commit -m "feat: add blog '${title}' by ${author}"
 git push origin ${CONFIG.github.branch}
 ```
+
+Note: CONFIG.site.domain should be a valid email domain (e.g., "yourdomain.com"). The email "blog@yourdomain.com" is used only in git metadata and doesn't need to be functional.
 
 ---
 
