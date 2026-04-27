@@ -1,0 +1,35 @@
+[
+  {
+    "id": "blog-001",
+    "slug": "cohort-based-learning-enterprise",
+    "title": "How Cohort-Based Learning Transforms Enterprise L&D",
+    "author": "Sonal Modi",
+    "weekFolder": "Wo01Apr",
+    "primaryKeyword": "cohort based learning enterprise",
+    "status": "published",
+    "dateCreated": "2026-04-07",
+    "datePublished": "2026-04-27"
+  },
+  {
+    "id": "blog-002",
+    "slug": "microlearning-retention",
+    "title": "Microlearning & Retention: Why Bite-Sized Beats Marathon",
+    "author": "Manjunath Rao",
+    "weekFolder": "Wo02May",
+    "primaryKeyword": "microlearning employee retention",
+    "status": "ready-to-publish",
+    "dateCreated": "2026-05-01",
+    "datePublished": null
+  },
+  {
+    "id": "blog-003",
+    "slug": "ai-adaptive-learning-paths",
+    "title": "AI-Powered Adaptive Learning Paths in 2026",
+    "author": "Akarshitha Gargi",
+    "weekFolder": "Wo03May",
+    "primaryKeyword": "adaptive learning AI personalization",
+    "status": "in-review",
+    "dateCreated": "2026-05-08",
+    "datePublished": null
+  }
+]
