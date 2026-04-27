@@ -39,9 +39,9 @@ async function runSetup() {
   };
 
   // Site info
-  config.site.name = await questionRequired('📝 Site name (e.g., "TechAcademy"): ');
-  config.site.domain = await questionRequired('🌐 Site domain (e.g., "techacademy.com"): ');
-  config.site.baseUrl = await questionRequired('🔗 Base URL (e.g., "https://techacademy.com"): ');
+  config.site.name = await questionRequired('📝 Site name (e.g., "ABC"): ');
+  config.site.domain = await questionRequired('🌐 Site domain (e.g., "abc.com"): ');
+  config.site.baseUrl = await questionRequired('🔗 Base URL (e.g., "https://abc.com"): ');
   config.site.description = await questionRequired('📄 Site description: ');
 
   // GitHub info
