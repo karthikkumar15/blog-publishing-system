@@ -13,6 +13,16 @@ function question(prompt) {
   });
 }
 
+async function questionRequired(prompt) {
+  while (true) {
+    const answer = await question(prompt);
+    if (answer.trim()) {
+      return answer.trim();
+    }
+    console.log('⚠️  This field is required. Please try again.');
+  }
+}
+
 async function runSetup() {
   console.log('\n🚀 Blog Publishing System Setup\n');
 
@@ -29,25 +39,25 @@ async function runSetup() {
   };
 
   // Site info
-  config.site.name = await question('📝 Site name (e.g., "TechAcademy"): ');
-  config.site.domain = await question('🌐 Site domain (e.g., "techacademy.com"): ');
-  config.site.baseUrl = await question('🔗 Base URL (e.g., "https://techacademy.com"): ');
-  config.site.description = await question('📄 Site description: ');
+  config.site.name = await questionRequired('📝 Site name (e.g., "TechAcademy"): ');
+  config.site.domain = await questionRequired('🌐 Site domain (e.g., "techacademy.com"): ');
+  config.site.baseUrl = await questionRequired('🔗 Base URL (e.g., "https://techacademy.com"): ');
+  config.site.description = await questionRequired('📄 Site description: ');
 
   // GitHub info
-  config.github.owner = await question('👤 GitHub username/org: ');
-  config.github.repo = await question('📦 Repository name (e.g., "blog"): ');
+  config.github.owner = await questionRequired('👤 GitHub username/org: ');
+  config.github.repo = await questionRequired('📦 Repository name (e.g., "blog"): ');
   config.github.branch = await question('🌳 Default branch (e.g., "main"): ') || 'main';
   config.github.contentPath = 'src/data';
   config.github.componentPath = 'src/components/articles';
 
   // Deployment
   config.deployment.platform = 'vercel';
-  config.deployment.projectName = await question('⚡ Vercel project name: ');
+  config.deployment.projectName = await questionRequired('⚡ Vercel project name: ');
 
   // Blog structure
-  config.blogStructure.trackerPath = await question('📋 Path to tracker.json (full path): ');
-  config.blogStructure.articlesRootPath = await question('📁 Articles root folder (full path): ');
+  config.blogStructure.trackerPath = await questionRequired('📋 Path to tracker.json (full path): ');
+  config.blogStructure.articlesRootPath = await questionRequired('📁 Articles root folder (full path): ');
 
   // Authors
   console.log('\n👥 Add authors (enter blank name to finish):');
@@ -67,16 +77,21 @@ async function runSetup() {
   }
 
   // Save config
-  const configPath = path.join(process.cwd(), 'config.json');
-  fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+  try {
+    const configPath = path.join(process.cwd(), 'config.json');
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    console.log(`\n✅ Configuration saved to config.json`);
+    console.log(`\nNext steps:`);
+    console.log(`1. Set your GITHUB_TOKEN: export GITHUB_TOKEN=ghp_xxxx`);
+    console.log(`2. Review config.json and adjust if needed`);
+    console.log(`3. Run: npm run publish\n`);
+  } catch (err) {
+    rl.close();
+    console.error(`\n❌ Failed to save config: ${err.message}`);
+    process.exit(1);
+  }
 
   rl.close();
-
-  console.log(`\n✅ Configuration saved to config.json`);
-  console.log(`\nNext steps:`);
-  console.log(`1. Set your GITHUB_TOKEN: export GITHUB_TOKEN=ghp_xxxx`);
-  console.log(`2. Review config.json and adjust if needed`);
-  console.log(`3. Run: npm run publish\n`);
 }
 
 runSetup().catch(err => {

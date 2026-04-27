@@ -8,6 +8,8 @@
 
 ## Step 1: Clone This Repository
 
+Replace `your-fork` with your GitHub username or organization name.
+
 ```bash
 git clone https://github.com/your-fork/blog-publishing-system.git
 cd blog-publishing-system
@@ -50,6 +52,12 @@ Or add to `.env`:
 GITHUB_TOKEN=ghp_xxxxxxxxxxxx
 ```
 
+**Important:** Add `.env` to your `.gitignore` file to prevent accidentally committing credentials:
+
+```bash
+echo ".env" >> .gitignore
+```
+
 ### Vercel Token (Optional - auto-deploys if configured)
 
 1. Go to https://vercel.com/account/tokens
@@ -62,11 +70,10 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxx
 npm run validate
 ```
 
-This checks that:
-- config.json is valid
-- GitHub token is accessible
-- Tracker and articles folders exist
-- All required files are present
+This command verifies:
+- config.json exists and is valid
+- Required blog structure files are present (`08-final-draft.md`, `10-seo-package.md`, `09-interactive-visuals/specs.md`)
+- GitHub token has required permissions
 
 ## Step 5: You're Ready!
 
