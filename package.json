@@ -1,0 +1,17 @@
+{
+  "name": "blog-publishing-system",
+  "version": "1.0.0",
+  "description": "Reusable blog publishing pipeline with AI-assisted content creation",
+  "main": "index.js",
+  "scripts": {
+    "init": "node scripts/init.js",
+    "validate": "node scripts/validate-config.js",
+    "check-token": "node scripts/check-token.js",
+    "publish": "node scripts/publish.js",
+    "list-authors": "node scripts/list-authors.js"
+  },
+  "keywords": ["blog", "publishing", "automation", "vercel"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}
