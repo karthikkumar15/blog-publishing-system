@@ -22,9 +22,9 @@ function loadConfig() {
 function validateConfig(config) {
   const required = [
     'site.name', 'site.domain', 'site.baseUrl', 'site.description',
-    'github.owner', 'github.repo', 'github.branch',
+    'github.owner', 'github.repo', 'github.branch', 'github.contentPath', 'github.componentPath',
     'deployment.platform', 'deployment.projectName',
-    'blogStructure.trackerPath', 'blogStructure.articlesRootPath',
+    'blogStructure.trackerPath', 'blogStructure.articlesRootPath', 'blogStructure.requiredFiles',
     'authors'
   ];
 
