@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "Reusable blog publishing pipeline with AI-assisted content creation",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karthikkumar/blog-publishing-system"
+  },
+  "bugs": {
+    "url": "https://github.com/karthikkumar/blog-publishing-system/issues"
+  },
+  "homepage": "https://github.com/karthikkumar/blog-publishing-system#readme",
   "scripts": {
     "init": "node scripts/init.js",
     "validate": "node scripts/validate-config.js",
